@@ -202,9 +202,13 @@ PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0.vendor
 
 # GPS
-LOC_HIDL_VERSION := 4.0
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := default
-$(call inherit-product-if-exists, $(LOCAL_PATH)/gps/gps_vendor_product.mk)
+PRODUCT_PACKAGES += \
+    flp.conf \
+    gnss@2.0-base.policy \
+    gnss@2.0-xtra-daemon.policy \
+    gnss@2.0-xtwifi-client.policy \
+    gnss@2.0-xtwifi-inet-agent.policy \
+    gps.conf
 
 PRODUCT_PACKAGES += \
     libsensorndkbridge
