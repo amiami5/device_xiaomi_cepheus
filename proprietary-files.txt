@@ -723,6 +723,7 @@ vendor/lib/libstagefrighthw.so
 
 # Misc
 vendor/etc/init/cnd.rc
+vendor/bin/ssr_setup|b7b760241c7c7f59d433143713b3c0b7aedae1b2
 
 # Mlipay
 vendor/bin/mlipayd@1.1
@@ -746,6 +747,11 @@ vendor/lib/libsn100u_fw.so
 vendor/bin/pm-proxy
 vendor/bin/pm-service
 vendor/lib64/libperipheral_client.so
+
+# Perf - from MIUI V12.5.6
+vendor/lib64/libperfconfig.so|a6417bae7c270aa55746c21fa553f8638e2646e7
+vendor/lib64/libperfgluelayer.so|ab07f0a6ded333726a9c5ae37a38dc91881fa11e
+vendor/lib64/libqti-util.so|e7e1db6dbd6cfe955a849e758faea6433e3491a1
 
 # Qualcomm MSM Interface
 system_ext/etc/permissions/qti_libpermissions.xml
