@@ -41,6 +41,3 @@ type sysfs_touchpanel, sysfs_type, fs_type;
 
 # Torch
 type sysfs_torch, fs_type, sysfs_type;
-
-# Dolby
-type vendor_dolby_data_file, file_type, data_file_type;

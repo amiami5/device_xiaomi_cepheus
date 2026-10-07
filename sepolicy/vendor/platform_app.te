@@ -4,6 +4,3 @@ allow platform_app nfc_service:service_manager find;
 allow platform_app cgroup:file r_file_perms;
 
 get_prop(platform_app, vendor_audio_prop)
-
-# Dolby
-hal_client_domain(platform_app, hal_dms)
