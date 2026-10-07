@@ -456,6 +456,13 @@ void loc_read_conf_long(const char* conf_file_name, const loc_param_s_type* conf
     log_tag_level_map_init();
 }
 
+/* Exported for prebuilt location blobs that link against loc_read_conf */
+void loc_read_conf(const char* conf_file_name, const loc_param_s_type* config_table,
+                   uint32_t table_length)
+{
+    loc_read_conf_long(conf_file_name, config_table, table_length, LOC_MAX_PARAM_STRING);
+}
+
 /*=============================================================================
  *
  *   Define and Structures for Parsing Location Process Configuration File
