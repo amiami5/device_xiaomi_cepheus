@@ -22,7 +22,14 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/xiaomi/cepheus/device.mk)
 
 # Inherit some common crDroid stuff.
+TARGET_DISABLE_EPPE := true
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+
+# Axion specific flags
+AXION_MAINTAINER := amisuke
+AXION_PROCESSOR := Snapdragon_855
+AXION_CAMERA_REAR_INFO := 48,16,12
+AXION_CAMERA_FRONT_INFO := 20
 
 # Boot animation
 TARGET_BOOT_ANIMATION_RES := 1080
