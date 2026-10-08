@@ -31,5 +31,20 @@ cepheus_setup_clang() {
     fi
 }
 
+# Make sure the kernel's submodules (KernelSU-Next) are initialised and at the
+# commit pinned by the kernel tree. drivers/kernelsu is a symlink into it, so
+# a missing checkout breaks Kconfig.
+cepheus_setup_kernel_submodules() {
+    local kdir
+    kdir="$(gettop)/kernel/xiaomi/cepheus"
+    [ -e "${kdir}/.git" ] || return 0
+
+    if ! git -C "${kdir}" submodule update --init KernelSU-Next >/dev/null 2>&1; then
+        echo "cepheus: failed to update KernelSU-Next submodule in ${kdir}" >&2
+        return 1
+    fi
+}
+
 cepheus_setup_clang
-unset -f cepheus_setup_clang
+cepheus_setup_kernel_submodules
+unset -f cepheus_setup_clang cepheus_setup_kernel_submodules
