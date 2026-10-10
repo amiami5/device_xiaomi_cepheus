@@ -93,16 +93,24 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
 TARGET_RECOVERY_DEVICE_MODULES := libinit_cepheus
 
 # Kernel
+BOARD_BOOT_HEADER_VERSION := 2
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_IMAGE_NAME := Image-dtb
+BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_SEPARATED_DTBO := true
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
 
 TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_CONFIG := cepheus_defconfig
+TARGET_KERNEL_CONFIG := \
+    vendor/sm8150-perf_defconfig \
+    vendor/debugfs.config \
+    vendor/xiaomi/sm8150-common.config \
+    vendor/xiaomi/cepheus.config
 TARGET_KERNEL_SOURCE := kernel/xiaomi/cepheus
+TARGET_KERNEL_VERSION := 4.19
 TARGET_KERNEL_CLANG_VERSION := r536225
 KERNEL_TOOLCHAIN := $(shell pwd)/prebuilts/clang/host/linux-x86/clang-r536225/bin
 KERNEL_SUPPORTS_LLD := true
@@ -184,6 +192,18 @@ TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 
 # QCOM
 BOARD_USES_QCOM_HARDWARE := true
+
+# Kernel 4.19 needs the sm8250 audio/display/media HALs. vendorsetup.sh
+# applies the msmnile patches in patches/ on top of them.
+QCOM_SOONG_NAMESPACE := hardware/qcom-caf/sm8250
+USE_DEVICE_SPECIFIC_AUDIO := true
+DEVICE_SPECIFIC_AUDIO_PATH := hardware/qcom-caf/sm8250/audio
+USE_DEVICE_SPECIFIC_DISPLAY := true
+DEVICE_SPECIFIC_DISPLAY_PATH := hardware/qcom-caf/sm8250/display
+USE_DEVICE_SPECIFIC_MEDIA := true
+DEVICE_SPECIFIC_MEDIA_PATH := hardware/qcom-caf/sm8250/media
+$(call soong_config_set,qtidisplay,target_no_camera_custom_format,true)
+$(call soong_config_set,qtidisplay,target_uses_legacy_buffer_align,true)
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom

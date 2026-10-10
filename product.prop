@@ -17,6 +17,9 @@ log.tag.CHIUSECASE=ERROR
 # Dex2oat
 dalvik.vm.systemuicompilerfilter=speed
 
+# eBPF
+ro.bpf.kver_override=5.4.299
+
 # Display
 ro.sf.lcd_density=440
 ro.surface_flinger.max_frame_buffer_acquired_buffers=3

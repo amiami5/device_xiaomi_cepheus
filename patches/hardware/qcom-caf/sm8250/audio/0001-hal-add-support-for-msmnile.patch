@@ -1,0 +1,29 @@
+From 71989e11e887f64f0272f96b45768b301ffec97e Mon Sep 17 00:00:00 2001
+From: duckyduckG <duckyduckg65@gmail.com>
+Date: Sat, 11 Oct 2025 21:30:26 +0500
+Subject: [PATCH] hal: add support for msmnile
+
+---
+ hal/Android.bp | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/hal/Android.bp b/hal/Android.bp
+index c162940d..ba57c872 100644
+--- a/hal/Android.bp
++++ b/hal/Android.bp
+@@ -99,6 +99,12 @@ target_board_platform_cc_library_shared {
+             "-DINCALL_STEREO_CAPTURE_ENABLED",
+             "-DSOUND_TRIGGER_PLATFORM_NAME=bengal",
+         ],
++        "msmnile": [
++            "-DPLATFORM_MSMNILE",
++            "-DMAX_TARGET_SPECIFIC_CHANNEL_CNT=4",
++            "-DINCALL_STEREO_CAPTURE_ENABLED",
++            "-DSOUND_TRIGGER_PLATFORM_NAME=msmnile",
++        ],
+         default: [],
+     }),
+ 
+-- 
+2.53.0
+

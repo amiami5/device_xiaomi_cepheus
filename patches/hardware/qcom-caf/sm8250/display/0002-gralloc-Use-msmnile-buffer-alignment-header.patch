@@ -1,0 +1,66 @@
+From 1f8a20e36641f09b9da4dee48a0509a74cfde50b Mon Sep 17 00:00:00 2001
+From: duckyduckg <duckyduckg65@gmail.com>
+Date: Wed, 22 Apr 2026 15:55:02 +0500
+Subject: [PATCH 2/2] gralloc: Use msmnile buffer alignment header
+
+msmnile uses older alignments(128x32).
+
+Change-Id: I24197449c06e7566a9d083cc212fd94372f74213
+Signed-off-by: duckyduckg <duckyduckg65@gmail.com>
+---
+ gralloc/Android.bp       | 3 +++
+ gralloc/gr_adreno_info.h | 4 ++++
+ gralloc/gr_utils.cpp     | 4 ++++
+ 3 files changed, 11 insertions(+)
+
+diff --git a/gralloc/Android.bp b/gralloc/Android.bp
+index 09726f27..f6c8d981 100644
+--- a/gralloc/Android.bp
++++ b/gralloc/Android.bp
+@@ -31,6 +31,9 @@ cc_library_shared {
+     }) + select(soong_config_variable("qtidisplay", "target_no_raw10_custom_format"), {
+         "true": ["-DNO_RAW10_CUSTOM_FORMAT"],
+         default: [],
++    }) + select(soong_config_variable("qtidisplay", "target_uses_legacy_buffer_align"), {
++        "true": ["-DDISP_LEGACY_ALIGN"],
++        default: [],
+     }) + select(soong_config_variable("qtidisplay", "target_uses_ycrcb_camera_preview"), {
+         "true": ["-DUSE_YCRCB_CAMERA_PREVIEW"],
+         default: [],
+diff --git a/gralloc/gr_adreno_info.h b/gralloc/gr_adreno_info.h
+index 76fa68a6..508244c4 100644
+--- a/gralloc/gr_adreno_info.h
++++ b/gralloc/gr_adreno_info.h
+@@ -31,8 +31,12 @@
+ #define __GR_ADRENO_INFO_H__
+ 
+ #ifndef QMAA
++#ifdef DISP_LEGACY_ALIGN
++#include <media/msm_media_info_msmnile.h>
++#else
+ #include <media/msm_media_info.h>
+ #endif
++#endif
+ 
+ #include "gr_utils.h"
+ 
+diff --git a/gralloc/gr_utils.cpp b/gralloc/gr_utils.cpp
+index 5afe9811..4fcacb96 100644
+--- a/gralloc/gr_utils.cpp
++++ b/gralloc/gr_utils.cpp
+@@ -62,8 +62,12 @@
+  */
+ 
+ #ifndef QMAA
++#ifdef DISP_LEGACY_ALIGN
++#include <media/msm_media_info_msmnile.h>
++#else
+ #include <media/msm_media_info.h>
+ #endif
++#endif
+ 
+ #include <drm/drm_fourcc.h>
+ 
+-- 
+2.53.0
+

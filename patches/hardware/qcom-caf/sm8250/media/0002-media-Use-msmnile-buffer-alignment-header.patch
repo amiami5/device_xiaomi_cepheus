@@ -1,0 +1,109 @@
+From f3ac1ede050fb49f5053cae3f3560cb95f4d0f87 Mon Sep 17 00:00:00 2001
+From: duckyduckG <duckyduckg65@gmail.com>
+Date: Wed, 22 Apr 2026 15:47:40 +0500
+Subject: [PATCH 2/3] media: Use msmnile buffer alignment header
+
+msmnile uses older alignments(128x32).
+
+Change-Id: I279c57b503316b53c210d4d328b421b449dedcbb
+Signed-off-by: duckyduckg <duckyduckg65@gmail.com>
+---
+ libc2dcolorconvert/Android.bp                             | 5 ++++-
+ libc2dcolorconvert/C2DColorConverter.h                    | 4 ++++
+ mm-video-v4l2/vidc/vdec/Android.bp                        | 1 +
+ mm-video-v4l2/vidc/vdec/inc/omx_vdec.h                    | 4 ++++
+ mm-video-v4l2/vidc/venc/Android.bp                        | 1 +
+ mm-video-v4l2/vidc/venc/src/video_encoder_device_v4l2.cpp | 4 ++++
+ 6 files changed, 18 insertions(+), 1 deletion(-)
+
+diff --git a/libc2dcolorconvert/Android.bp b/libc2dcolorconvert/Android.bp
+index edce09f1..95218537 100644
+--- a/libc2dcolorconvert/Android.bp
++++ b/libc2dcolorconvert/Android.bp
+@@ -11,7 +11,10 @@ cc_library_shared {
+ 
+     cflags: [
+         "-Werror",
+-    ],
++    ] + select(soong_config_variable("ANDROID", "target_board_platform"), {
++        "msmnile": ["-DVIDC_LEGACY_ALIGN"],
++        default: [],
++    }),
+ 
+     header_libs: [
+         "display_headers",
+diff --git a/libc2dcolorconvert/C2DColorConverter.h b/libc2dcolorconvert/C2DColorConverter.h
+index 2f06f8a6..f2d5be1e 100644
+--- a/libc2dcolorconvert/C2DColorConverter.h
++++ b/libc2dcolorconvert/C2DColorConverter.h
+@@ -39,7 +39,11 @@
+ #include <dlfcn.h>
+ #include <string.h>
+ #include <errno.h>
++#ifdef VIDC_LEGACY_ALIGN
++#include <media/msm_media_info_msmnile.h>
++#else
+ #include <media/msm_media_info.h>
++#endif
+ #include <gralloc_priv.h>
+ #include <unordered_map>
+ 
+diff --git a/mm-video-v4l2/vidc/vdec/Android.bp b/mm-video-v4l2/vidc/vdec/Android.bp
+index cb5dbfe4..3b8f053a 100644
+--- a/mm-video-v4l2/vidc/vdec/Android.bp
++++ b/mm-video-v4l2/vidc/vdec/Android.bp
+@@ -23,6 +23,7 @@ cc_library_shared {
+         "-DUSE_ION",
+     ] + select(soong_config_variable("ANDROID", "target_board_platform"), {
+         "bengal": ["-U_UBWC_"],
++        "msmnile": ["-DVIDC_LEGACY_ALIGN"],
+         default: [],
+     }),
+ 
+diff --git a/mm-video-v4l2/vidc/vdec/inc/omx_vdec.h b/mm-video-v4l2/vidc/vdec/inc/omx_vdec.h
+index dab7b75c..adcbb7c0 100644
+--- a/mm-video-v4l2/vidc/vdec/inc/omx_vdec.h
++++ b/mm-video-v4l2/vidc/vdec/inc/omx_vdec.h
+@@ -55,7 +55,11 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ #include "media/hardware/VideoAPI.h"
+ #include "media/hardware/HardwareAPI.h"
+ #include <unordered_map>
++#ifdef VIDC_LEGACY_ALIGN
++#include <media/msm_media_info_msmnile.h>
++#else
+ #include <media/msm_media_info.h>
++#endif
+ #include <OMX_Core.h>
+ #include <list>
+ 
+diff --git a/mm-video-v4l2/vidc/venc/Android.bp b/mm-video-v4l2/vidc/venc/Android.bp
+index ba31d18c..8cb0460e 100644
+--- a/mm-video-v4l2/vidc/venc/Android.bp
++++ b/mm-video-v4l2/vidc/venc/Android.bp
+@@ -22,6 +22,7 @@ cc_library_shared {
+         "-DUSE_NATIVE_HANDLE_SOURCE",
+     ] + select(soong_config_variable("ANDROID", "target_board_platform"), {
+         "bengal": ["-U_UBWC_"],
++        "msmnile": ["-DVIDC_LEGACY_ALIGN"],
+         default: [],
+     }),
+ 
+diff --git a/mm-video-v4l2/vidc/venc/src/video_encoder_device_v4l2.cpp b/mm-video-v4l2/vidc/venc/src/video_encoder_device_v4l2.cpp
+index b7733935..e2d79c67 100644
+--- a/mm-video-v4l2/vidc/venc/src/video_encoder_device_v4l2.cpp
++++ b/mm-video-v4l2/vidc/venc/src/video_encoder_device_v4l2.cpp
+@@ -41,7 +41,11 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ #include<linux/v4l2-controls.h>
+ 
+ #include <math.h>
++#ifdef VIDC_LEGACY_ALIGN
++#include <media/msm_media_info_msmnile.h>
++#else
+ #include <media/msm_media_info.h>
++#endif
+ #include <cutils/properties.h>
+ #include <media/hardware/HardwareAPI.h>
+ 
+-- 
+2.53.0
+

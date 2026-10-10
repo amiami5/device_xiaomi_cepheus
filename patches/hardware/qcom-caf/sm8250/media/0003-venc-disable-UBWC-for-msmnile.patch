@@ -1,0 +1,31 @@
+From ef01f133b404067f248590874efde74f3a668970 Mon Sep 17 00:00:00 2001
+From: duckyduckg <duckyduckg65@gmail.com>
+Date: Thu, 17 Sep 2026 02:08:51 +0500
+Subject: [PATCH 3/3] venc: disable UBWC for msmnile
+
+* breaks camera recording and camera2api
+
+Change-Id: Iec18322d086c05673bf862a63e181890b9e8ca9b
+---
+ mm-video-v4l2/vidc/venc/Android.bp | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/mm-video-v4l2/vidc/venc/Android.bp b/mm-video-v4l2/vidc/venc/Android.bp
+index 8cb0460e..715a8c74 100644
+--- a/mm-video-v4l2/vidc/venc/Android.bp
++++ b/mm-video-v4l2/vidc/venc/Android.bp
+@@ -22,7 +22,10 @@ cc_library_shared {
+         "-DUSE_NATIVE_HANDLE_SOURCE",
+     ] + select(soong_config_variable("ANDROID", "target_board_platform"), {
+         "bengal": ["-U_UBWC_"],
+-        "msmnile": ["-DVIDC_LEGACY_ALIGN"],
++        "msmnile": [
++            "-U_UBWC_",
++            "-DVIDC_LEGACY_ALIGN",
++            ],
+         default: [],
+     }),
+ 
+-- 
+2.53.0
+

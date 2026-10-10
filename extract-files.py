@@ -15,7 +15,7 @@ from extract_utils.main import (
 
 namespace_imports = [
     "device/xiaomi/cepheus",
-	"hardware/qcom-caf/sm8150",
+	"hardware/qcom-caf/sm8250",
 	"hardware/qcom-caf/wlan",
 	"hardware/xiaomi",
 	"vendor/qcom/opensource/dataservices",
@@ -50,6 +50,8 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('libaudioroute.so', 'libaudioroute-v34.so'),
     'vendor/lib64/hw/audio.primary.msmnile.so': blob_fixup()
         .replace_needed('libaudioroute.so', 'libaudioroute-v34.so'),
+    'vendor/lib64/libdpps.so': blob_fixup()
+        .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(
