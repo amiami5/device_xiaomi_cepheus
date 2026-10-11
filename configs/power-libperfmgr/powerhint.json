@@ -297,7 +297,7 @@
         "1"
       ],
       "DefaultIndex": 0,
-      "ResetOnInit": true
+      "ResetOnInit": false
     }
   ],
   "Actions": [
