@@ -22,7 +22,10 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Whether devices suports in-display fingerprint when screen is off -->
-    <bool name="config_supportScreenOffUdfps">true</bool>
+    <bool name="config_screen_off_udfps_enabled">true</bool>
+
+    <!-- Sensor type fired by the UDFPS HAL (sensors.cepheus_udfps) on finger down -->
+    <string name="config_dozeUdfpsLongPressSensorType" translatable="false">org.lineageos.sensor.udfps</string>
 
     <!-- Pocket Lock -->
     <bool name="config_pocketModeSupported">false</bool>
