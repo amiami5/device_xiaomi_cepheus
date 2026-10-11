@@ -23,3 +23,7 @@ set_prop(vendor_init, mlipay_prop)
 
 # Enable EAS from vendor.setup.power
 allow vendor_init proc_sched:file w_file_perms;
+
+# memlat governor creates its perf events with the writer's credentials,
+# so init needs perf_event access when mem_latency is set from init.power.rc
+allow vendor_init self:perf_event { open cpu kernel read write };
