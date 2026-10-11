@@ -627,6 +627,7 @@ PRODUCT_COPY_FILES += \
 
 # WiFi Display
 PRODUCT_PACKAGES += \
+    libdisplayconfig.qti \
     libwfdaac_vendor
 
 # Override heap growth limit due to high display density on device
