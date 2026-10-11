@@ -184,6 +184,7 @@ TARGET_BOARD_PLATFORM := msmnile
 
 # Power
 TARGET_POWER_LIBPERFMGR_MODE_EXTENSION_LIB := //$(DEVICE_PATH):libperfmgr-ext-xiaomi
+$(call soong_config_set,power_libperfmgr,mode_extension_lib,$(TARGET_POWER_LIBPERFMGR_MODE_EXTENSION_LIB))
 
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
