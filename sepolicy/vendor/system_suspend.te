@@ -1,0 +1,3 @@
+# Read wakeup source statistics. The files under /sys/class/wakeup/* resolve
+# to the device paths, which are labeled sysfs.
+allow system_suspend sysfs:file r_file_perms;

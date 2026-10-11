@@ -16,3 +16,10 @@ allow init same_process_hal_file:file execute;
 # /proc/last_kmsg
 allow init proc_last_kmsg:file r_file_perms;
 allow init proc_last_kmsg:file setattr;
+
+# Properties set by vendor init (vendor.prop, init.*.rc)
+set_prop(vendor_init, vendor_fp_prop)
+set_prop(vendor_init, mlipay_prop)
+
+# Enable EAS from vendor.setup.power
+allow vendor_init proc_sched:file w_file_perms;
