@@ -139,8 +139,8 @@ PRODUCT_PACKAGES += \
     disable_configstore
 
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.composer@2.4-service \
     vendor.qti.hardware.display.allocator-service \
+    vendor.qti.hardware.display.composer-service \
     vendor.qti.hardware.memtrack-service
 
 PRODUCT_PACKAGES += \
@@ -158,8 +158,7 @@ PRODUCT_PACKAGES += \
     vendor.display.config@2.0.vendor
 
 PRODUCT_PACKAGES += \
-    gralloc.qcom \
-    hwcomposer.qcom \
+    gralloc.qcom
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
