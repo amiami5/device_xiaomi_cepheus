@@ -64,9 +64,9 @@ on property:vendor.setup.power=1
     write /sys/devices/platform/soc/soc:qcom,cpu0-cpu-llcc-lat/devfreq/soc:qcom,cpu0-cpu-llcc-lat/polling_interval 10
     write /sys/devices/platform/soc/soc:qcom,cpu0-cpu-llcc-lat/devfreq/soc:qcom,cpu0-cpu-llcc-lat/mem_latency/ratio_ceil 400
 
-    write /sys/devices/platform/soc/soc:qcom,cpu0-cpu-l3-lat/devfreq/soc:qcom,cpu0-cpu-l3-lat/governor mem_latency
-    write /sys/devices/platform/soc/soc:qcom,cpu0-cpu-l3-lat/devfreq/soc:qcom,cpu0-cpu-l3-lat/polling_interval 10
-    write /sys/devices/platform/soc/soc:qcom,cpu0-cpu-l3-lat/devfreq/soc:qcom,cpu0-cpu-l3-lat/mem_latency/ratio_ceil 400
+    write /sys/class/devfreq/18321000.qcom,devfreq-l3:qcom,cpu0-cpu-l3-lat/governor mem_latency
+    write /sys/class/devfreq/18321000.qcom,devfreq-l3:qcom,cpu0-cpu-l3-lat/polling_interval 10
+    write /sys/class/devfreq/18321000.qcom,devfreq-l3:qcom,cpu0-cpu-l3-lat/mem_latency/ratio_ceil 400
 
     write /sys/devices/platform/soc/soc:qcom,cpu0-llcc-ddr-lat/devfreq/soc:qcom,cpu0-llcc-ddr-lat/governor mem_latency
     write /sys/devices/platform/soc/soc:qcom,cpu0-llcc-ddr-lat/devfreq/soc:qcom,cpu0-llcc-ddr-lat/polling_interval 10
@@ -76,22 +76,22 @@ on property:vendor.setup.power=1
     write /sys/devices/platform/soc/soc:qcom,cpu4-cpu-llcc-lat/devfreq/soc:qcom,cpu4-cpu-llcc-lat/polling_interval 10
     write /sys/devices/platform/soc/soc:qcom,cpu4-cpu-llcc-lat/devfreq/soc:qcom,cpu4-cpu-llcc-lat/mem_latency/ratio_ceil 400
 
-    write /sys/devices/platform/soc/soc:qcom,cpu4-cpu-l3-lat/devfreq/soc:qcom,cpu4-cpu-l3-lat/governor mem_latency
-    write /sys/devices/platform/soc/soc:qcom,cpu4-cpu-l3-lat/devfreq/soc:qcom,cpu4-cpu-l3-lat/polling_interval 10
+    write /sys/class/devfreq/18321000.qcom,devfreq-l3:qcom,cpu4-cpu-l3-lat/governor mem_latency
+    write /sys/class/devfreq/18321000.qcom,devfreq-l3:qcom,cpu4-cpu-l3-lat/polling_interval 10
     # Gold L3 ratio ceil is 4000
-    write /sys/devices/platform/soc/soc:qcom,cpu4-cpu-l3-lat/devfreq/soc:qcom,cpu4-cpu-l3-lat/mem_latency/ratio_ceil 4000
+    write /sys/class/devfreq/18321000.qcom,devfreq-l3:qcom,cpu4-cpu-l3-lat/mem_latency/ratio_ceil 4000
 
-    write /sys/devices/platform/soc/soc:qcom,cpu7-cpu-l3-lat/devfreq/soc:qcom,cpu7-cpu-l3-lat/governor mem_latency
-    write /sys/devices/platform/soc/soc:qcom,cpu7-cpu-l3-lat/devfreq/soc:qcom,cpu7-cpu-l3-lat/polling_interval 10
+    write /sys/class/devfreq/18321000.qcom,devfreq-l3:qcom,cpu7-cpu-l3-lat/governor mem_latency
+    write /sys/class/devfreq/18321000.qcom,devfreq-l3:qcom,cpu7-cpu-l3-lat/polling_interval 10
     # Gold+ L3 ratio ceil is 20000
-    write /sys/devices/platform/soc/soc:qcom,cpu7-cpu-l3-lat/devfreq/soc:qcom,cpu7-cpu-l3-lat/mem_latency/ratio_ceil 20000
+    write /sys/class/devfreq/18321000.qcom,devfreq-l3:qcom,cpu7-cpu-l3-lat/mem_latency/ratio_ceil 20000
 
     write /sys/devices/platform/soc/soc:qcom,cpu4-llcc-ddr-lat/devfreq/soc:qcom,cpu4-llcc-ddr-lat/governor mem_latency
     write /sys/devices/platform/soc/soc:qcom,cpu4-llcc-ddr-lat/devfreq/soc:qcom,cpu4-llcc-ddr-lat/polling_interval 10
     write /sys/devices/platform/soc/soc:qcom,cpu4-llcc-ddr-lat/devfreq/soc:qcom,cpu4-llcc-ddr-lat/mem_latency/ratio_ceil 400
 
     # Enable userspace governor for L3 cdsp nodes
-    write /sys/devices/platform/soc/soc:qcom,cdsp-cdsp-l3-lat/devfreq/soc:qcom,cdsp-cdsp-l3-lat/governor cdspl3
+    write /sys/class/devfreq/18321000.qcom,devfreq-l3:qcom,cdsp-cdsp-l3-lat/governor cdspl3
 
     # Enable compute governor for gold latfloor
     write /sys/devices/platform/soc/soc:qcom,cpu4-cpu-ddr-latfloor/devfreq/soc:qcom,cpu4-cpu-ddr-latfloor/governor compute
