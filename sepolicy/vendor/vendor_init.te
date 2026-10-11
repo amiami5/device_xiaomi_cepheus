@@ -28,3 +28,7 @@ allow vendor_init proc_watermark_scale_factor:file w_file_perms;
 allow vendor_init block_device:lnk_file { setattr };
 allow vendor_init input_device:chr_file { create setattr unlink rw_file_perms };
 allow vendor_init vendor_camera_prop:property_service set;
+
+# Allow vendor_init to set the cnd and IMS properties from vendor.prop
+set_prop(vendor_init, vendor_cnd_prop)
+set_prop(vendor_init, vendor_ims_prop)
