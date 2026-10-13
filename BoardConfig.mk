@@ -108,7 +108,8 @@ TARGET_KERNEL_CONFIG := \
     vendor/sm8150-perf_defconfig \
     vendor/debugfs.config \
     vendor/xiaomi/sm8150-common.config \
-    vendor/xiaomi/cepheus.config
+    vendor/xiaomi/cepheus.config \
+    vendor/extras/ksu.config
 TARGET_KERNEL_SOURCE := kernel/xiaomi/cepheus
 TARGET_KERNEL_VERSION := 4.19
 TARGET_KERNEL_CLANG_VERSION := r536225
