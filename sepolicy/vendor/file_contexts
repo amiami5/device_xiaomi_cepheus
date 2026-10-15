@@ -59,3 +59,6 @@
 /sys/class/thermal                                                                                     u:object_r:sysfs_thermal:s0
 /vendor/bin/mi_thermald                                                                                u:object_r:mi_thermald_exec:s0
 /data/vendor/thermal(/.*)?                                                                             u:object_r:thermal_data_file:s0
+
+# zram recompress
+/vendor/bin/zram_recompress\.sh                                                                        u:object_r:vendor_zram_recompress_exec:s0

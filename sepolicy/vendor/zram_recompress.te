@@ -1,0 +1,15 @@
+#
+# Copyright (C) 2026 amisuke
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+type vendor_zram_recompress, domain;
+type vendor_zram_recompress_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(vendor_zram_recompress)
+
+allow vendor_zram_recompress vendor_toolbox_exec:file rx_file_perms;
+allow vendor_zram_recompress vendor_shell_exec:file rx_file_perms;
+allow vendor_zram_recompress sysfs_zram:dir search;
+allow vendor_zram_recompress sysfs_zram:file rw_file_perms;
