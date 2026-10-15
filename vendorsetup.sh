@@ -31,18 +31,18 @@ cepheus_setup_clang() {
     fi
 }
 
-# Make sure the kernel's submodules (KernelSU) are initialised and at the
+# Make sure the kernel's submodules (KernelSU-Next) are initialised and at the
 # commit pinned by the kernel tree. drivers/kernelsu is a symlink into it, so
-# a missing checkout breaks Kconfig. This is the same KernelSU fork as pipa,
-# so the official KernelSU manager works on both.
+# a missing checkout breaks Kconfig. pipa uses the same KernelSU-Next (legacy),
+# so the official KernelSU-Next manager works on both.
 cepheus_setup_kernel_submodules() {
     local kdir
     kdir="$(gettop)/kernel/xiaomi/cepheus"
     [ -e "${kdir}/.git" ] || return 0
     [ -f "${kdir}/.gitmodules" ] || return 0
 
-    if ! git -C "${kdir}" submodule update --init KernelSU >/dev/null 2>&1; then
-        echo "cepheus: failed to update KernelSU submodule in ${kdir}" >&2
+    if ! git -C "${kdir}" submodule update --init KernelSU-Next >/dev/null 2>&1; then
+        echo "cepheus: failed to update KernelSU-Next submodule in ${kdir}" >&2
         return 1
     fi
 }
