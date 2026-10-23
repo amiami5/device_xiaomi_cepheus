@@ -357,6 +357,12 @@ PRODUCT_PACKAGES += \
     vendor.xiaomi.hardware.mlipay@1.1.vendor \
     vendor.xiaomi.hardware.mtdservice@1.0.vendor
 
+# Mtdservice (Widevine/FIDO provisioning)
+PRODUCT_PACKAGES += \
+    vendor.xiaomi.hardware.mfidoca@1.0.vendor \
+    vendor.xiaomi.hardware.mtdservice@1.1.vendor \
+    vendor.xiaomi.hardware.mtdservice@1.2.vendor
+
 # MiuiCamera
 $(call soong_config_set,camera,package_name,com.android.camera)
 $(call soong_config_set_bool,camera,override_format_from_reserved,true)

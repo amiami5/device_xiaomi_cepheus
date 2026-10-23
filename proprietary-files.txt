@@ -742,6 +742,17 @@ vendor/etc/init/vendor.xiaomi.hardware.mlipay@1.1-service.rc
 vendor/lib64/libmlipay.so
 vendor/lib64/libmlipay@1.1.so
 
+# Mtdservice (Widevine/FIDO provisioning) - from xiaomi.eu V12.5.6.0.RFACNXM
+vendor/bin/fidoca|33dc6f58501cfd00e6809f2cfd42e03ea6116489
+vendor/bin/mtd@1.2|ce9f4d207f78409754d1231d9ab2350772423578
+vendor/etc/init/vendor.xiaomi.hardware.mfidoca@1.0-service.rc|d9224ad626f1c5a43040207bbe94896f9198f0eb
+vendor/etc/init/vendor.xiaomi.hardware.mtdservice@1.2-service.rc|6dbe93c298c60b6e6cb9531aa68f83d871fc22c0
+-vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.mfidoca.xml|6db87ba511674ae5e1cdd1ce522a3495c271f1d4
+-vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.mtdservice.xml|a1da0d794c3cf87cd14c13fd99a5d75ee9a957e4
+vendor/lib64/libmfido.so|34ff0a6f8db01eae1dec5bd9e83e765f1e9ce76d
+vendor/lib64/libmt@1.2.so|465a73cbcb232acd71fe597a291f6168babb8287
+vendor/lib64/libwvkeybox.so|e5f29abd3f626be68cc52eda96d584631da79ac3
+
 # Neural-networks
 vendor/bin/hw/android.hardware.neuralnetworks@1.3-service-qti
 vendor/etc/init/android.hardware.neuralnetworks@1.3-service-qti.rc

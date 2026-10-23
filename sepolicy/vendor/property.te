@@ -7,6 +7,9 @@ vendor_public_prop(vendor_fp_prop)
 # Mlipay
 vendor_public_prop(mlipay_prop)
 
+# Mtdservice
+vendor_internal_prop(vendor_mtdservice_prop)
+
 # Thermal
 vendor_internal_prop(vendor_thermal_prop)
 vendor_internal_prop(thermal_normal_prop)

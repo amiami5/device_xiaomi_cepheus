@@ -10,6 +10,10 @@ type hal_xiaomi_fingerprint_hwservice, hwservice_manager_type;
 # Mlipay
 type hal_mlipay_hwservice, hwservice_manager_type;
 
+# Mtdservice
+type hal_mfidoca_hwservice, hwservice_manager_type;
+type hal_mtdservice_hwservice, hwservice_manager_type;
+
 # NXP services
 type nxpese_hwservice, hwservice_manager_type;
 type nxpnfc_hwservice, hwservice_manager_type;
