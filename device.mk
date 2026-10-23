@@ -361,7 +361,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.xiaomi.hardware.mfidoca@1.0.vendor \
     vendor.xiaomi.hardware.mtdservice@1.1.vendor \
-    vendor.xiaomi.hardware.mtdservice@1.2.vendor
+    vendor.xiaomi.hardware.mtdservice@1.2.vendor \
+    WidevineProvision
 
 # MiuiCamera
 $(call soong_config_set,camera,package_name,com.android.camera)

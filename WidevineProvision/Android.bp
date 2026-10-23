@@ -1,0 +1,22 @@
+//
+// Copyright (C) 2026 amisuke
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+android_app {
+    name: "WidevineProvision",
+
+    srcs: ["src/**/*.java"],
+    certificate: "platform",
+    platform_apis: true,
+    system_ext_specific: true,
+
+    static_libs: [
+        "vendor.xiaomi.hardware.mtdservice-V1.2-java",
+    ],
+
+    optimize: {
+        enabled: false,
+    },
+}
