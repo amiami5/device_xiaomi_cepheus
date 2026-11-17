@@ -1,0 +1,18 @@
+diff --git a/src/java/com/android/internal/telephony/subscription/SubscriptionManagerService.java b/src/java/com/android/internal/telephony/subscription/SubscriptionManagerService.java
+index d945e724b5..fcb15bc22f 100644
+--- a/src/java/com/android/internal/telephony/subscription/SubscriptionManagerService.java
++++ b/src/java/com/android/internal/telephony/subscription/SubscriptionManagerService.java
+@@ -895,8 +895,11 @@ public class SubscriptionManagerService extends ISub.Stub {
+ 
+         for (UiccSlot uiccSlot : uiccSlots) {
+             if (uiccSlot != null && uiccSlot.getCardState() != null
+-                    && uiccSlot.getCardState().isCardPresent() && !uiccSlot.isEuicc()) {
+-                // Non euicc slots will have single port, so use default port index.
++                    && uiccSlot.getCardState().isCardPresent()
++                    && (!uiccSlot.isEuicc() || mEuiccManager == null
++                    || !mEuiccManager.isEnabled())) {
++                // Non euicc slots (or eUICC slots without an active LPA) will have single port,
++                // so use default port index.
+                 String iccId = uiccSlot.getIccId(TelephonyManager.DEFAULT_PORT_INDEX);
+                 if (!TextUtils.isEmpty(iccId)) {
+                     iccidList.add(getStrippedIccid(iccId));
