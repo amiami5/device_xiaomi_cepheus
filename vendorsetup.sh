@@ -31,22 +31,6 @@ cepheus_setup_clang() {
     fi
 }
 
-# Make sure the kernel's submodules (KernelSU-Next) are initialised and at the
-# commit pinned by the kernel tree. drivers/kernelsu is a symlink into it, so
-# a missing checkout breaks Kconfig. pipa uses the same KernelSU-Next (legacy),
-# so the official KernelSU-Next manager works on both.
-cepheus_setup_kernel_submodules() {
-    local kdir
-    kdir="$(gettop)/kernel/xiaomi/cepheus"
-    [ -e "${kdir}/.git" ] || return 0
-    [ -f "${kdir}/.gitmodules" ] || return 0
-
-    if ! git -C "${kdir}" submodule update --init KernelSU-Next >/dev/null 2>&1; then
-        echo "cepheus: failed to update KernelSU-Next submodule in ${kdir}" >&2
-        return 1
-    fi
-}
-
 # Apply the patches in patches/<path>/ on top of the shared HAL/framework trees
 # (hardware/qcom-caf/sm8250/*, frameworks/opt/telephony). Every change is
 # guarded by device/config conditions so other devices are unaffected.
@@ -97,6 +81,5 @@ cepheus_apply_patches() {
 }
 
 cepheus_setup_clang
-cepheus_setup_kernel_submodules
 cepheus_apply_patches
-unset -f cepheus_setup_clang cepheus_setup_kernel_submodules cepheus_apply_patches
+unset -f cepheus_setup_clang cepheus_apply_patches
