@@ -112,8 +112,7 @@ TARGET_KERNEL_CONFIG := \
     vendor/extras/ksu.config
 TARGET_KERNEL_SOURCE := kernel/xiaomi/cepheus
 TARGET_KERNEL_VERSION := 4.19
-TARGET_KERNEL_CLANG_VERSION := r536225
-KERNEL_TOOLCHAIN := $(shell pwd)/prebuilts/clang/host/linux-x86/clang-r536225/bin
+TARGET_KERNEL_CLANG_PATH := $(abspath ../toolchains/llvm-clang)
 KERNEL_SUPPORTS_LLD := true
 KERNEL_SUPPORTS_LLVM_TOOLS := true
 
