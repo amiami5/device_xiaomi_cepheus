@@ -6,6 +6,20 @@
 # Set CEPHEUS_SKIP_LLVM_BUILD=1 to skip automatic building.
 #
 
+_cepheus_resolve_tool() {
+    local cmd="$1"
+    local fallback="$2"
+    if command -v "${cmd}" >/dev/null 2>&1; then
+        command -v "${cmd}"
+        return 0
+    fi
+    if [ -n "${fallback}" ] && [ -x "${fallback}" ]; then
+        echo "${fallback}"
+        return 0
+    fi
+    return 1
+}
+
 cepheus_setup_llvm_clang() {
     local top
     top="$(gettop)"
@@ -24,12 +38,32 @@ cepheus_setup_llvm_clang() {
         return 0
     fi
 
-    for cmd in git cmake ninja python3; do
-        if ! command -v "${cmd}" >/dev/null 2>&1; then
-            echo "cepheus: missing required tool '${cmd}' to build llvm-clang" >&2
-            return 1
-        fi
-    done
+    local cmake_bin ninja_bin python3_bin
+    if ! command -v git >/dev/null 2>&1; then
+        echo "cepheus: missing required tool 'git' to build llvm-clang" >&2
+        return 1
+    fi
+    cmake_bin="$(_cepheus_resolve_tool cmake "${top}/prebuilts/cmake/linux-x86/bin/cmake")" || {
+        echo "cepheus: missing required tool 'cmake' to build llvm-clang" >&2
+        return 1
+    }
+    ninja_bin="$(_cepheus_resolve_tool ninja "${top}/prebuilts/build-tools/linux-x86/bin/ninja")" || {
+        echo "cepheus: missing required tool 'ninja' to build llvm-clang" >&2
+        return 1
+    }
+    python3_bin="$(_cepheus_resolve_tool python3 "${top}/prebuilts/build-tools/path/linux-x86/python3")" || {
+        echo "cepheus: missing required tool 'python3' to build llvm-clang" >&2
+        return 1
+    }
+
+    if [ -z "${CC:-}" ] && ! command -v cc >/dev/null 2>&1 && ! command -v gcc >/dev/null 2>&1 && ! command -v clang >/dev/null 2>&1; then
+        echo "cepheus: missing host C compiler (install build-essential or clang) to build llvm-clang" >&2
+        return 1
+    fi
+    if [ -z "${CXX:-}" ] && ! command -v c++ >/dev/null 2>&1 && ! command -v g++ >/dev/null 2>&1 && ! command -v clang++ >/dev/null 2>&1; then
+        echo "cepheus: missing host C++ compiler (install build-essential or clang) to build llvm-clang" >&2
+        return 1
+    fi
 
     mkdir -p "${cache_dir}" || return 1
 
@@ -47,7 +81,9 @@ cepheus_setup_llvm_clang() {
     fi
 
     echo "cepheus: configuring llvm-clang in ${build_dir}"
-    cmake -S "${src_dir}/llvm" -B "${build_dir}" -G Ninja \
+    "${cmake_bin}" -S "${src_dir}/llvm" -B "${build_dir}" -G Ninja \
+        -DCMAKE_MAKE_PROGRAM="${ninja_bin}" \
+        -DPython3_EXECUTABLE="${python3_bin}" \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_INSTALL_PREFIX="${install_dir}" \
         -DLLVM_ENABLE_PROJECTS="clang;lld" \
@@ -55,10 +91,10 @@ cepheus_setup_llvm_clang() {
         -DLLVM_ENABLE_ASSERTIONS=OFF || return 1
 
     echo "cepheus: building llvm-clang (this may take a while on first run)"
-    cmake --build "${build_dir}" -j"$(nproc)" || return 1
+    "${cmake_bin}" --build "${build_dir}" -j"$(nproc)" || return 1
 
     echo "cepheus: installing llvm-clang to ${install_dir}"
-    cmake --install "${build_dir}" || return 1
+    "${cmake_bin}" --install "${build_dir}" || return 1
 }
 
 # Apply the patches in patches/<path>/ on top of the shared HAL/framework trees
@@ -112,4 +148,4 @@ cepheus_apply_patches() {
 
 cepheus_setup_llvm_clang
 cepheus_apply_patches
-unset -f cepheus_setup_llvm_clang cepheus_apply_patches
+unset -f _cepheus_resolve_tool cepheus_setup_llvm_clang cepheus_apply_patches
