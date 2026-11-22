@@ -265,6 +265,9 @@ $(call soong_config_set,libinit,vendor_init_lib,libinit_cepheus)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/gpio-keys.kl
 
+PRODUCT_PACKAGES += \
+    CepheusParts
+
 # IR
 PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \

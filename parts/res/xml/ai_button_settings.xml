@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:key="cepheus_ai_button_short_press_app"
+        android:title="@string/ai_button_short_press_title"
+        android:summary="@string/ai_button_default_action" />
+
+    <Preference
+        android:key="cepheus_ai_button_long_press_app"
+        android:title="@string/ai_button_long_press_title"
+        android:summary="@string/ai_button_default_action" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="ai_button_footer"
+        android:title="@string/ai_button_footer_info"
+        android:selectable="false" />
+
+</PreferenceScreen>
