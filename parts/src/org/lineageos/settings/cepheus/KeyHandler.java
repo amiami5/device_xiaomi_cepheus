@@ -26,6 +26,8 @@ import android.view.ViewConfiguration;
 
 import com.android.internal.os.DeviceKeyHandler;
 
+import lineageos.providers.LineageSettings;
+
 public class KeyHandler implements DeviceKeyHandler {
 
     private static final String TAG = "CepheusKeyHandler";
@@ -65,6 +67,39 @@ public class KeyHandler implements DeviceKeyHandler {
         ContentObserver observer = new ContentObserver(mHandler) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
+                if (uri != null) {
+                    if (uri.equals(LineageSettings.System.getUriFor(
+                            LineageSettings.System.KEY_ASSIST_ACTION))) {
+                        int action = LineageSettings.System.getIntForUser(
+                                resolver,
+                                LineageSettings.System.KEY_ASSIST_ACTION,
+                                Constants.ACTION_SEARCH,
+                                UserHandle.USER_CURRENT);
+                        if (action != Constants.ACTION_NOTHING
+                                && !TextUtils.isEmpty(mShortPressApp)) {
+                            Settings.System.putStringForUser(
+                                    resolver,
+                                    Constants.KEY_SHORT_PRESS_APP,
+                                    "",
+                                    UserHandle.USER_CURRENT);
+                        }
+                    } else if (uri.equals(LineageSettings.System.getUriFor(
+                            LineageSettings.System.KEY_ASSIST_LONG_PRESS_ACTION))) {
+                        int action = LineageSettings.System.getIntForUser(
+                                resolver,
+                                LineageSettings.System.KEY_ASSIST_LONG_PRESS_ACTION,
+                                Constants.ACTION_VOICE_SEARCH,
+                                UserHandle.USER_CURRENT);
+                        if (action != Constants.ACTION_NOTHING
+                                && !TextUtils.isEmpty(mLongPressApp)) {
+                            Settings.System.putStringForUser(
+                                    resolver,
+                                    Constants.KEY_LONG_PRESS_APP,
+                                    "",
+                                    UserHandle.USER_CURRENT);
+                        }
+                    }
+                }
                 loadSettings();
             }
         };
@@ -73,6 +108,13 @@ public class KeyHandler implements DeviceKeyHandler {
                 false, observer, UserHandle.USER_ALL);
         resolver.registerContentObserver(
                 Settings.System.getUriFor(Constants.KEY_LONG_PRESS_APP),
+                false, observer, UserHandle.USER_ALL);
+        resolver.registerContentObserver(
+                LineageSettings.System.getUriFor(LineageSettings.System.KEY_ASSIST_ACTION),
+                false, observer, UserHandle.USER_ALL);
+        resolver.registerContentObserver(
+                LineageSettings.System.getUriFor(
+                        LineageSettings.System.KEY_ASSIST_LONG_PRESS_ACTION),
                 false, observer, UserHandle.USER_ALL);
     }
 
@@ -90,6 +132,7 @@ public class KeyHandler implements DeviceKeyHandler {
             return event;
         }
 
+        loadSettings();
         if (TextUtils.isEmpty(mShortPressApp) && TextUtils.isEmpty(mLongPressApp)) {
             return event;
         }
@@ -101,9 +144,9 @@ public class KeyHandler implements DeviceKeyHandler {
                 mIgnoreCurrentGesture = false;
 
                 if (mPowerManager != null && !mPowerManager.isInteractive()) {
-                    boolean wakeEnabled = Settings.System.getIntForUser(
+                    boolean wakeEnabled = LineageSettings.System.getIntForUser(
                             mContext.getContentResolver(),
-                            Constants.KEY_ASSIST_WAKE_SCREEN,
+                            LineageSettings.System.ASSIST_WAKE_SCREEN,
                             0,
                             UserHandle.USER_CURRENT) == 1;
                     if (!wakeEnabled) {
@@ -116,10 +159,8 @@ public class KeyHandler implements DeviceKeyHandler {
                             "cepheus:ai_button");
                 }
 
-                if (!TextUtils.isEmpty(mLongPressApp)) {
-                    mHandler.postDelayed(
-                            mLongPressRunnable, ViewConfiguration.getLongPressTimeout());
-                }
+                mHandler.postDelayed(
+                        mLongPressRunnable, ViewConfiguration.getLongPressTimeout());
             }
             return null;
         }

@@ -6,12 +6,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference
-        android:key="ai_button_short_press_app"
+        android:key="cepheus_ai_button_short_press_app"
         android:title="@string/ai_button_short_press_title"
         android:summary="@string/ai_button_default_action" />
 
     <Preference
-        android:key="ai_button_long_press_app"
+        android:key="cepheus_ai_button_long_press_app"
         android:title="@string/ai_button_long_press_title"
         android:summary="@string/ai_button_default_action" />
 

@@ -6,6 +6,7 @@
 package org.lineageos.settings.cepheus;
 
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,6 +26,8 @@ import android.widget.TextView;
 import androidx.preference.Preference;
 
 import com.android.settingslib.widget.SettingsBasePreferenceFragment;
+
+import lineageos.providers.LineageSettings;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -106,6 +109,43 @@ public class AiButtonSettingsFragment extends SettingsBasePreferenceFragment {
         }
     }
 
+    private void syncSystemAssistSetting(
+            ContentResolver resolver, String settingKey, String selectedPkg) {
+        final boolean isShort = Constants.KEY_SHORT_PRESS_APP.equals(settingKey);
+        final String lineageKey = isShort
+                ? LineageSettings.System.KEY_ASSIST_ACTION
+                : LineageSettings.System.KEY_ASSIST_LONG_PRESS_ACTION;
+        final String backupKey = isShort
+                ? Constants.KEY_PREV_ASSIST_ACTION
+                : Constants.KEY_PREV_ASSIST_LONG_PRESS_ACTION;
+        final int defaultAction = isShort
+                ? Constants.ACTION_SEARCH
+                : Constants.ACTION_VOICE_SEARCH;
+
+        if (!TextUtils.isEmpty(selectedPkg)) {
+            int currentAction = LineageSettings.System.getIntForUser(
+                    resolver, lineageKey, defaultAction, UserHandle.USER_CURRENT);
+            if (currentAction != Constants.ACTION_NOTHING) {
+                Settings.System.putIntForUser(
+                        resolver, backupKey, currentAction, UserHandle.USER_CURRENT);
+            }
+            LineageSettings.System.putIntForUser(
+                    resolver, lineageKey, Constants.ACTION_NOTHING, UserHandle.USER_CURRENT);
+        } else {
+            int currentAction = LineageSettings.System.getIntForUser(
+                    resolver, lineageKey, defaultAction, UserHandle.USER_CURRENT);
+            if (currentAction == Constants.ACTION_NOTHING) {
+                int prevAction = Settings.System.getIntForUser(
+                        resolver, backupKey, defaultAction, UserHandle.USER_CURRENT);
+                if (prevAction == Constants.ACTION_NOTHING) {
+                    prevAction = defaultAction;
+                }
+                LineageSettings.System.putIntForUser(
+                        resolver, lineageKey, prevAction, UserHandle.USER_CURRENT);
+            }
+        }
+    }
+
     private void showAppPickerDialog(String settingKey, Preference targetPref) {
         Context context = requireContext();
         PackageManager pm = context.getPackageManager();
@@ -137,11 +177,13 @@ public class AiButtonSettingsFragment extends SettingsBasePreferenceFragment {
                 .setTitle(R.string.ai_button_select_app_title)
                 .setAdapter(adapter, (dialog, which) -> {
                     AppEntry selected = apps.get(which);
+                    ContentResolver resolver = context.getContentResolver();
                     Settings.System.putStringForUser(
-                            context.getContentResolver(),
+                            resolver,
                             settingKey,
                             selected.packageName,
                             UserHandle.USER_CURRENT);
+                    syncSystemAssistSetting(resolver, settingKey, selected.packageName);
                     updatePreferenceSummary(targetPref, settingKey);
                 })
                 .setNegativeButton(android.R.string.cancel, null)
@@ -151,12 +193,10 @@ public class AiButtonSettingsFragment extends SettingsBasePreferenceFragment {
     private static class AppListAdapter extends BaseAdapter {
         private final LayoutInflater mInflater;
         private final List<AppEntry> mItems;
-        private final int mIconSize;
 
         AppListAdapter(Context context, List<AppEntry> items) {
             mInflater = LayoutInflater.from(context);
             mItems = items;
-            mIconSize = Math.round(36 * context.getResources().getDisplayMetrics().density);
         }
 
         @Override
@@ -178,21 +218,17 @@ public class AiButtonSettingsFragment extends SettingsBasePreferenceFragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = convertView;
             if (view == null) {
-                view = mInflater.inflate(
-                        android.R.layout.activity_list_item, parent, false);
+                view = mInflater.inflate(R.layout.app_list_item, parent, false);
             }
             AppEntry item = getItem(position);
-            ImageView iconView = view.findViewById(android.R.id.icon);
-            TextView textView = view.findViewById(android.R.id.text1);
+            ImageView iconView = view.findViewById(R.id.app_icon);
+            TextView textView = view.findViewById(R.id.app_label);
 
             if (item.icon != null) {
-                ViewGroup.LayoutParams lp = iconView.getLayoutParams();
-                lp.width = mIconSize;
-                lp.height = mIconSize;
-                iconView.setLayoutParams(lp);
                 iconView.setImageDrawable(item.icon);
                 iconView.setVisibility(View.VISIBLE);
             } else {
+                iconView.setImageDrawable(null);
                 iconView.setVisibility(View.INVISIBLE);
             }
             textView.setText(item.label);
