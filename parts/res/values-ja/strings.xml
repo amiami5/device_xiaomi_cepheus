@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="ai_button_title">AI ボタン</string>
+    <string name="ai_button_summary">AI ボタンで任意のアプリを起動</string>
+    <string name="ai_button_short_press_title">短く押したときに開くアプリ</string>
+    <string name="ai_button_long_press_title">長押しで開くアプリ</string>
+    <string name="ai_button_default_action">デフォルト（システムのボタン設定を使用）</string>
+    <string name="ai_button_select_app_title">アプリを選択</string>
+    <string name="ai_button_footer_info">両方とも「デフォルト」に設定されている場合は、「設定 &gt; システム &gt; ボタン &gt; 検索ボタン」の設定に従って動作します。</string>
+</resources>
