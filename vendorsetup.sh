@@ -113,7 +113,8 @@ cepheus_apply_patches() {
         hardware/qcom-caf/sm8250/audio \
         hardware/qcom-caf/sm8250/media \
         frameworks/opt/telephony \
-        packages/apps/AxionParts; do
+        packages/apps/AxionParts \
+        axion_sdk; do
         repo="${top}/${rel}"
         [ -e "${repo}/.git" ] || continue
         [ -d "${pdir}/${rel}" ] || continue

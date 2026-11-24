@@ -1,0 +1,24 @@
+diff --git a/ax_dexopt_server/src/com/android/server/pm/AxDexoptManagerImpl.java b/ax_dexopt_server/src/com/android/server/pm/AxDexoptManagerImpl.java
+index a26b69b..1789d31 100644
+--- a/ax_dexopt_server/src/com/android/server/pm/AxDexoptManagerImpl.java
++++ b/ax_dexopt_server/src/com/android/server/pm/AxDexoptManagerImpl.java
+@@ -379,18 +379,7 @@ public class AxDexoptManagerImpl implements IAxDexoptManager {
+         if (notificationManager == null) {
+             return;
+         }
+-        int safeTotal = Math.max(1, total);
+-        Notification notification = new Notification.Builder(context, SystemNotificationChannels.SYSTEM_DEXOPT)
+-                .setSmallIcon(17301633)
+-                .setContentTitle(context.getString(R.string.dexopt_notification_title))
+-                .setContentText(context.getString(R.string.dexopt_notification_complete))
+-                .setProgress(safeTotal, safeTotal, false)
+-                .setContentIntent(createAppOptimizationPendingIntent(context))
+-                .setCategory(Notification.CATEGORY_PROGRESS)
+-                .setOnlyAlertOnce(true)
+-                .setAutoCancel(true)
+-                .build();
+-        notificationManager.notify(NOTIFICATION_ID_USER_DEXOPT, notification);
++        notificationManager.cancel(NOTIFICATION_ID_USER_DEXOPT);
+     }
+ 
+     private void showUserDexoptError() {
