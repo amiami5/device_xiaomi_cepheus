@@ -1,0 +1,12 @@
+diff --git a/src/com/android/axion/axionparts/ui/DashboardScreen.kt b/src/com/android/axion/axionparts/ui/DashboardScreen.kt
+index 17923e0..4aff62d 100644
+--- a/src/com/android/axion/axionparts/ui/DashboardScreen.kt
++++ b/src/com/android/axion/axionparts/ui/DashboardScreen.kt
+@@ -536,6 +536,7 @@ private fun DetailPaneContent(
+             )
+         "kernel_manager" -> KernelManagerScreen(onBackClick = onClose)
+         "ram_plus" -> RamPlusScreen(onBackClick = onClose)
++        "app_optimization" -> AppOptimizationScreen(onBackClick = onClose)
+         "app_picker" ->
+             ManagedAppPickerScreen(
+                 titleRes = appPickerTitleRes,

@@ -112,7 +112,8 @@ cepheus_apply_patches() {
         hardware/qcom-caf/sm8250/display \
         hardware/qcom-caf/sm8250/audio \
         hardware/qcom-caf/sm8250/media \
-        frameworks/opt/telephony; do
+        frameworks/opt/telephony \
+        packages/apps/AxionParts; do
         repo="${top}/${rel}"
         [ -e "${repo}/.git" ] || continue
         [ -d "${pdir}/${rel}" ] || continue
@@ -123,7 +124,10 @@ cepheus_apply_patches() {
         tree=""
         for f in "${pdir}/${rel}"/*.patch; do
             [ -f "${f}" ] || continue
-            if ! GIT_INDEX_FILE="${tmp_index}" git -C "${repo}" apply --cached "${f}"; then
+            if ! GIT_INDEX_FILE="${tmp_index}" git -C "${repo}" apply --cached "${f}" 2>/dev/null; then
+                if git -C "${repo}" apply --reverse --check "${f}" >/dev/null 2>&1; then
+                    continue
+                fi
                 echo "cepheus: ${f##*/} does not apply to ${repo}" >&2
                 continue 2
             fi
