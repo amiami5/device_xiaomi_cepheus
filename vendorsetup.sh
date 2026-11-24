@@ -114,7 +114,8 @@ cepheus_apply_patches() {
         hardware/qcom-caf/sm8250/media \
         frameworks/opt/telephony \
         packages/apps/AxionParts \
-        axion_sdk; do
+        axion_sdk \
+        vendor/xiaomi/miuicamera-cepheus; do
         repo="${top}/${rel}"
         [ -e "${repo}/.git" ] || continue
         [ -d "${pdir}/${rel}" ] || continue

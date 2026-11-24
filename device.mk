@@ -369,7 +369,7 @@ PRODUCT_PACKAGES += \
 # MiuiCamera
 $(call soong_config_set,camera,package_name,com.android.camera)
 $(call soong_config_set_bool,camera,override_format_from_reserved,true)
-$(call inherit-product-if-exists, vendor/xiaomi/miuicamera/config.mk)
+$(call inherit-product-if-exists, $(LOCAL_PATH)/camera/miuicamera.mk)
 
 # Network
 PRODUCT_PACKAGES += \

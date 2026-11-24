@@ -1,0 +1,30 @@
+diff --git a/overlays/MiuiCameraOverlayMi9/res/values/config.xml b/overlays/MiuiCameraOverlayMi9/res/values/config.xml
+index f09e79f..7f55aa3 100644
+--- a/overlays/MiuiCameraOverlayMi9/res/values/config.xml
++++ b/overlays/MiuiCameraOverlayMi9/res/values/config.xml
+@@ -2,7 +2,7 @@
+ 
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+ 	<!-- hide Universal settings button -->
+-	<bool name="hide_universal_settings">true</bool>
++	<bool name="hide_universal_settings">false</bool>
+ 
+ 	<!-- this fix disables Studio lighting feature from Portrait mode, usually fixes crashing on AOSP ROMs -->
+ 	<bool name="pref_portraitfix_default">true</bool>
+@@ -14,13 +14,13 @@
+ 	     main features are Leica/Film filters, AI Watermark, Supermoon, Leica/Redmi watermarks
+ 	     Parallel processing is usually broken on AOSP and MIUI/HyperOS ports, 
+ 	     on AOSP it may be fixed by including some libs, also heavily depends on Device Tree and ROM sources -->
+-	<bool name="pref_camera_parallel_process_enable_default">false</bool>
++	<bool name="pref_camera_parallel_process_enable_default">true</bool>
+ 
+ 	<!-- enable to use Parallel processing when Front camera is used -->
+-	<bool name="pref_parallelfront_default">false</bool>
++	<bool name="pref_parallelfront_default">true</bool>
+ 
+  	<!-- enable to use Parallel processing when UltraHD (xxMP) is used -->
+-	<bool name="pref_ultra_parallel_default">false</bool>
++	<bool name="pref_ultra_parallel_default">true</bool>
+ 
+ 	<!-- disable multi-lens zoom in video when EIS is enabled -->
+ 	<bool name="pref_limit_video_sat_default">true</bool>

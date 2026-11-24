@@ -27,3 +27,15 @@ cc_library_static {
         "frameworks/av/services/camera/libcameraservice/common"
     ],
 }
+
+install_symlink {
+    name: "miui_camera_cepheus_libcamera_mianode_symlink",
+    installed_location: "priv-app/MiuiCamera/lib/arm64/libcamera_mianode_jni.xiaomi.so",
+    symlink_target: "/system/lib64/libcamera_mianode_jni.xiaomi.so",
+}
+
+install_symlink {
+    name: "miui_camera_cepheus_campostproc_symlink",
+    installed_location: "priv-app/MiuiCamera/lib/arm64/vendor.xiaomi.hardware.campostproc@1.0.so",
+    symlink_target: "/system/lib64/vendor.xiaomi.hardware.campostproc@1.0.so",
+}
