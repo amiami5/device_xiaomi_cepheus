@@ -112,9 +112,12 @@ TARGET_SCREEN_HEIGHT := 2340
 TARGET_SCREEN_WIDTH := 1080
 
 # Camera
+ifeq ($(wildcard vendor/xiaomi/miuicamera-cepheus/Android.bp),)
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service_64
+    android.hardware.camera.provider@2.4-service_64 \
+    vendor.qti.hardware.camera.device@1.0.vendor
+endif
 
 PRODUCT_PACKAGES += \
     libcamera2ndk_vendor \
@@ -122,7 +125,6 @@ PRODUCT_PACKAGES += \
     libgui_vendor \
     libpng.vendor \
     libstdc++_vendor \
-    vendor.qti.hardware.camera.device@1.0.vendor \
     vendor.qti.hardware.camera.postproc@1.0.vendor
 
 PRODUCT_PACKAGES += \
@@ -158,7 +160,9 @@ PRODUCT_PACKAGES += \
     vendor.display.config@2.0.vendor
 
 PRODUCT_PACKAGES += \
-    gralloc.qcom
+    gralloc.qcom \
+    libdmabufheap.vendor \
+    libgsl_c2d_shim
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
@@ -369,7 +373,7 @@ PRODUCT_PACKAGES += \
 # MiuiCamera
 $(call soong_config_set,camera,package_name,com.android.camera)
 $(call soong_config_set_bool,camera,override_format_from_reserved,true)
-$(call inherit-product-if-exists, vendor/xiaomi/miuicamera/config.mk)
+$(call inherit-product-if-exists, $(LOCAL_PATH)/camera/miuicamera.mk)
 
 # Network
 PRODUCT_PACKAGES += \
