@@ -161,7 +161,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     gralloc.qcom \
-    libdmabufheap.vendor
+    libdmabufheap.vendor \
+    libgsl_c2d_shim
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml

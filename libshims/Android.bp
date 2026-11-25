@@ -1,0 +1,15 @@
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_library_shared {
+    name: "libgsl_c2d_shim",
+    srcs: ["libgsl_c2d_shim.c"],
+    shared_libs: [
+        "libdl",
+        "liblog",
+    ],
+    vendor: true,
+    compile_multilib: "32",
+}

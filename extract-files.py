@@ -52,6 +52,8 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('libaudioroute.so', 'libaudioroute-v34.so'),
     'vendor/lib64/libdpps.so': blob_fixup()
         .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
+    ('vendor/lib/libC2D2.so', 'vendor/lib/libc2d30_bltlib.so'): blob_fixup()
+        .add_needed('libgsl_c2d_shim.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(
