@@ -112,9 +112,12 @@ TARGET_SCREEN_HEIGHT := 2340
 TARGET_SCREEN_WIDTH := 1080
 
 # Camera
+ifeq ($(wildcard vendor/xiaomi/miuicamera-cepheus/Android.bp),)
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service_64
+    android.hardware.camera.provider@2.4-service_64 \
+    vendor.qti.hardware.camera.device@1.0.vendor
+endif
 
 PRODUCT_PACKAGES += \
     libcamera2ndk_vendor \
@@ -122,7 +125,6 @@ PRODUCT_PACKAGES += \
     libgui_vendor \
     libpng.vendor \
     libstdc++_vendor \
-    vendor.qti.hardware.camera.device@1.0.vendor \
     vendor.qti.hardware.camera.postproc@1.0.vendor
 
 PRODUCT_PACKAGES += \
