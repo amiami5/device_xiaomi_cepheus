@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="ai_button_title">Przycisk AI</string>
+    <string name="ai_button_summary">Uruchamiaj wybrane aplikacje za pomocą przycisku AI</string>
+    <string name="ai_button_short_press_title">Aplikacja po krótkim naciśnięciu</string>
+    <string name="ai_button_long_press_title">Aplikacja po długim naciśnięciu</string>
+    <string name="ai_button_default_action">Domyślnie (użyj systemowych ustawień przycisków)</string>
+    <string name="ai_button_select_app_title">Wybierz aplikację</string>
+    <string name="ai_button_footer_info">Gdy obie opcje są ustawione na Domyślnie, przycisk AI działa zgodnie z ustawieniami w sekcji Ustawienia &gt; System &gt; Przyciski &gt; Przycisk szukaj.</string>
+</resources>

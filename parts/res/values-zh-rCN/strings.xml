@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="ai_button_title">AI 键</string>
+    <string name="ai_button_summary">使用 AI 键启动自定义应用</string>
+    <string name="ai_button_short_press_title">短按应用</string>
+    <string name="ai_button_long_press_title">长按应用</string>
+    <string name="ai_button_default_action">默认（使用系统按键设置）</string>
+    <string name="ai_button_select_app_title">选择应用</string>
+    <string name="ai_button_footer_info">当两个选项均设为“默认”时，AI 键将遵循“设置 &gt; 系统 &gt; 按键 &gt; 搜索键”中配置的行为。</string>
+</resources>

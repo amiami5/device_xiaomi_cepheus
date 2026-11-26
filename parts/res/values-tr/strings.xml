@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="ai_button_title">Yapay zeka tuşu</string>
+    <string name="ai_button_summary">Yapay zeka tuşuyla özel uygulamalar başlatın</string>
+    <string name="ai_button_short_press_title">Kısa basma uygulaması</string>
+    <string name="ai_button_long_press_title">Uzun basma uygulaması</string>
+    <string name="ai_button_default_action">Varsayılan (sistem tuş ayarlarını kullan)</string>
+    <string name="ai_button_select_app_title">Uygulama seç</string>
+    <string name="ai_button_footer_info">Her iki seçenek de Varsayılan olarak ayarlandığında yapay zeka tuşu, Ayarlar &gt; Sistem &gt; Tuşlar &gt; Arama tuşu bölümünde yapılandırılan davranışı izler.</string>
+</resources>

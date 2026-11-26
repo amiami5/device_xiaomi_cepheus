@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="ai_button_title">AI-Taste</string>
+    <string name="ai_button_summary">Benutzerdefinierte Apps mit der AI-Taste starten</string>
+    <string name="ai_button_short_press_title">App bei kurzem Drücken</string>
+    <string name="ai_button_long_press_title">App bei langem Drücken</string>
+    <string name="ai_button_default_action">Standard (System-Tasteneinstellungen verwenden)</string>
+    <string name="ai_button_select_app_title">App auswählen</string>
+    <string name="ai_button_footer_info">Wenn beide Optionen auf Standard eingestellt sind, folgt die AI-Taste dem Verhalten unter Einstellungen &gt; System &gt; Tasten &gt; Suche-Taste.</string>
+</resources>

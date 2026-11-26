@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="ai_button_title">ปุ่ม AI</string>
+    <string name="ai_button_summary">เปิดแอปที่กำหนดเองด้วยปุ่ม AI</string>
+    <string name="ai_button_short_press_title">แอปเมื่อกดสั้น</string>
+    <string name="ai_button_long_press_title">แอปเมื่อกดค้าง</string>
+    <string name="ai_button_default_action">ค่าเริ่มต้น (ใช้การตั้งค่าปุ่มของระบบ)</string>
+    <string name="ai_button_select_app_title">เลือกแอป</string>
+    <string name="ai_button_footer_info">เมื่อตั้งค่าทั้งสองตัวเลือกเป็นค่าเริ่มต้น ปุ่ม AI จะทำงานตามที่กำหนดไว้ในการตั้งค่า &gt; ระบบ &gt; ปุ่ม &gt; ปุ่มค้นหา</string>
+</resources>

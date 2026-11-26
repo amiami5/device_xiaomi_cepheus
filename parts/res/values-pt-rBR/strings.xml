@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="ai_button_title">Botão de IA</string>
+    <string name="ai_button_summary">Iniciar aplicativos personalizados com o botão de IA</string>
+    <string name="ai_button_short_press_title">Aplicativo ao pressionar rapidamente</string>
+    <string name="ai_button_long_press_title">Aplicativo ao manter pressionado</string>
+    <string name="ai_button_default_action">Padrão (usar configurações de botões do sistema)</string>
+    <string name="ai_button_select_app_title">Selecionar aplicativo</string>
+    <string name="ai_button_footer_info">Quando ambas as opções estiverem definidas como Padrão, o botão de IA seguirá o comportamento configurado em Configurações &gt; Sistema &gt; Botões &gt; Botão de pesquisa.</string>
+</resources>

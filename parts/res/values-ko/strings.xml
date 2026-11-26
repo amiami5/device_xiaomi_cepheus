@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="ai_button_title">AI 버튼</string>
+    <string name="ai_button_summary">AI 버튼으로 사용자 지정 앱 실행</string>
+    <string name="ai_button_short_press_title">짧게 누르기 앱</string>
+    <string name="ai_button_long_press_title">길게 누르기 앱</string>
+    <string name="ai_button_default_action">기본값(시스템 버튼 설정 사용)</string>
+    <string name="ai_button_select_app_title">앱 선택</string>
+    <string name="ai_button_footer_info">두 옵션이 모두 기본값으로 설정된 경우, AI 버튼은 설정 &gt; 시스템 &gt; 버튼 &gt; 검색 버튼에 구성된 동작을 따릅니다.</string>
+</resources>

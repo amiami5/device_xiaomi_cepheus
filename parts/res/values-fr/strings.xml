@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="ai_button_title">Bouton IA</string>
+    <string name="ai_button_summary">Lancer des applications personnalisées avec le bouton IA</string>
+    <string name="ai_button_short_press_title">Application sur appui court</string>
+    <string name="ai_button_long_press_title">Application sur appui long</string>
+    <string name="ai_button_default_action">Par défaut (utiliser les paramètres des boutons du système)</string>
+    <string name="ai_button_select_app_title">Sélectionner une application</string>
+    <string name="ai_button_footer_info">Lorsque les deux options sont définies sur Par défaut, le bouton IA suit le comportement configuré dans Paramètres &gt; Système &gt; Boutons &gt; Bouton de recherche.</string>
+</resources>
