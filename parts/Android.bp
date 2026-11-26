@@ -13,6 +13,8 @@ android_app {
     system_ext_specific: true,
     privileged: true,
 
+    overrides: ["Updater"],
+
     static_libs: [
         "org.lineageos.platform.internal",
         "org.lineageos.settings.resources",
